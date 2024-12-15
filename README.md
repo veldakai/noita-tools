@@ -6,7 +6,7 @@ A collection of simple tools realted to Noita game.
 1. **visualize_coords.py**: Visualizes coordinates from filenames with the pattern `world_{x-coord}_{y-coord}.png_petri`.
    - Usage:
      ```sh
-     python visualize_coords.py /path/to/directory
+     python show_visited_chunks.py /path/to/directory
      ```
 
 ## Get started
