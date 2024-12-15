@@ -11,7 +11,7 @@ def show_visited_chunks(directory):
         match = re.match(pattern, filename)
         if match:
             x, y = map(int, match.groups())
-            chunk_coordinates.append((x // 512, y // 512))
+            chunk_coordinates.append((x // 512, -y // 512))
 
     if chunk_coordinates:
         x_chunks, y_chunks = zip(*chunk_coordinates)
