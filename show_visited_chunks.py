@@ -25,10 +25,21 @@ def show_visited_chunks(save_directory_path):
     plt.title("Visited Chunks Visualization")
     plt.xlabel("Chunk X Coordinate")
     plt.ylabel("Chunk Y Coordinate")
-    plt.grid(True)
-    plt.axhline(0, color='black', linewidth=0.5)
-    plt.axvline(0, color='black', linewidth=0.5)
-    plt.gca().invert_yaxis()  # Invert the Y-axis
+
+    # Add guiding lines
+    plt.grid(which='both', linestyle='--', linewidth=0.5, alpha=0.7)
+    plt.axhline(0, color='black', linewidth=1)  # Horizontal center line
+    plt.axvline(0, color='black', linewidth=1)  # Vertical center line
+
+    # Set custom ticks for the X-axis
+    x_min = min(x_chunks) if x_chunks else -35
+    x_max = max(x_chunks) if x_chunks else 35
+    x_ticks = list(range((x_min // 70 - 1) * 70 + 35, (x_max // 70 + 1) * 70 + 1, 70))
+    plt.xticks(x_ticks)
+
+    # Ensure the Y-axis is inverted (positive Y goes down)
+    plt.gca().invert_yaxis()
+
     plt.show()
 
 if __name__ == "__main__":
