@@ -3,7 +3,9 @@ import re
 import matplotlib.pyplot as plt
 import sys
 
-def show_visited_chunks(directory):
+def show_visited_chunks(save_directory_path):
+    # Append "world" subdirectory to the given directory path
+    directory = os.path.join(save_directory_path, "world")
     pattern = r"world_(-?\d+)_(-?\d+)\.png_petri"
     chunk_coordinates = []
 
@@ -11,7 +13,7 @@ def show_visited_chunks(directory):
         match = re.match(pattern, filename)
         if match:
             x, y = map(int, match.groups())
-            chunk_coordinates.append((x // 512, -y // 512))
+            chunk_coordinates.append((x // 512, y // 512))
 
     if chunk_coordinates:
         x_chunks, y_chunks = zip(*chunk_coordinates)
@@ -26,12 +28,13 @@ def show_visited_chunks(directory):
     plt.grid(True)
     plt.axhline(0, color='black', linewidth=0.5)
     plt.axvline(0, color='black', linewidth=0.5)
+    plt.gca().invert_yaxis()  # Invert the Y-axis
     plt.show()
 
 if __name__ == "__main__":
     if len(sys.argv) < 2:
-        print("Usage: python show_visited_chunks.py <directory_path>")
+        print("Usage: python show_visited_chunks.py <save_directory_path>")
         sys.exit(1)
     
-    directory = sys.argv[1]
-    show_visited_chunks(directory)
+    save_directory_path = sys.argv[1]
+    show_visited_chunks(save_directory_path)
